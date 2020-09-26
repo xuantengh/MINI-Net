@@ -16,19 +16,52 @@ This repo contains source code for our ECCV 2020 work **MINI-Net: Multiple Insta
 
 - step1: split audio and video from origin data:
 
+  First, group your custom dataset into different directories by their category like this:
 
+  ```
+  .
+  |-- base_jump
+  |   |-- 1.mp4
+  |   |-- 2.mp4
+  |   |-- 3.mp4
+  |   |-- ...
+  |-- bike_polo
+  |   |-- 1.mp4
+  |   |-- ...
+  |-- eiffel_tower
+  |   |-- 1.mp4
+  |   |-- ...
+  |-- excavators_river_cross
+  |   |-- ...
+  ```
+
+  Then run `youtube_splitAudio` method in `visual-audio fusion/tools.py` to split audio file from origin video. Parameter `path` is the path to videos, while the `savepath` is the path to save the splited `.wav` audio file.
 
 - step2: extract audio feature with pretrained model and store in file:
 
-
+  ```bash
+  cd audio_process
+  python AudioCNN.py --audio_path path/to/wav_files --save_path path/to/save/audio/features
+  ```
 
 - step3: extract video feature with pretrained model and store in file:
 
+  ```bash
+  cd video-classifcation-3d-cnn-pytorch
+  CUDA_VISIBLE_DEVICES=1 python main.py \
+  --video_root path/to/videos/belongs/to/same/category \
+  --savename path/to/save/video/features \
+  --model ./resnet-34-kinetics.pth --mode feature
+  ```
 
+  You must install `ffmpeg` to use C3D to extract visual features. See more details at their readme:`video-classifcation-3d-cnn-pytorch/README.md`.
 
 - step4: get video length:
 
-
+  ```bash
+  cd audio_process
+  python getDuration.py --audio_path path/to/wav_files --duration_path path/to/save/video/lengths
+  ```
 
 ## Train
 
@@ -57,6 +90,22 @@ Parameters:
 - `AHLoss`: hinger loss used in our paper
 
 See `visual-audio fusion/opts.py` for details of data selection hyper-parameters.
+
+Note: In our code, the directory  `train_path`  in the parameter must include:
+
+1. visual feature files generated in step 3
+2. audio feature files generated in step 2
+3. video length files generated in step 4
+
+For example, there contains 3 files for category PK belongs to TVsum dataset in that directory:
+
+```
+PK_1s.npy											// visual features for video with categoty PK
+PK_audio_edited_nopost.npy		// audio features
+PK_duration.npy								// duration information for each valid video
+```
+
+
 
 ## Main Results
 
@@ -105,10 +154,7 @@ See `visual-audio fusion/opts.py` for details of data selection hyper-parameters
 
 If you find our work helpful in your research, please cite our paper via:
 
-bib:
-
 ```
-
 Bib:
 @inproceedings{hong2020mini,
 title={MINI-Net: Multiple Instance Ranking Network for Video Highlight Detec- tion},

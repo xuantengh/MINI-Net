@@ -61,8 +61,10 @@ import argparse
 def parse_opts():
     parser = argparse.ArgumentParser()
    
-    parser.add_argument('--ctg',type=str)
-    parser.add_argument('--dataset',type=str)
+    # parser.add_argument('--ctg',type=str)
+    # parser.add_argument('--dataset',type=str)
+    parser.add_argument('audio_path',type=str)
+    parser.add_argument('save_path',type=str)
     parser.add_argument('--cuda',action='store_true')
     parser.add_argument('--postprocess',action='store_true')
 
@@ -74,18 +76,21 @@ def parse_opts():
 if __name__ == '__main__':
     args = parse_opts()
     with torch.no_grad():
-        if args.dataset == 'instagram':
-            audio_paths = recursive_get_list('/home/share/Highlight/orgDataset/instagram_audio/'+args.ctg)
-            save_path_edited = '/home/share/Highlight/proDataset/TrainingSet/'+args.ctg+'_audio_edited'
-        if args.dataset == 'youtube':
-            audio_paths = recursive_get_list('/home/share/Highlight/proDataset/DomainSpecific/audio/'+args.ctg)
-            save_path_edited = '/home/share/Highlight/proDataset/DomainSpecific/feature/'+args.ctg+'_audio_edited'
-        if args.dataset == 'tvsum':
-            audio_paths = recursive_get_list('/home/share/Highlight/proDataset/TVSum/audio/'+args.ctg)
-            save_path_edited = '/home/share/Highlight/proDataset/TVSum/feature/'+args.ctg+'_audio_edited'
-        if args.dataset == 'cosum':
-            audio_paths = recursive_get_list('/home/share/Highlight/proDataset/CoSum/audio/'+args.ctg)
-            save_path_edited = '/home/share/Highlight/proDataset/CoSum/feature/'+args.ctg+'_audio_edited'
+        # if args.dataset == 'instagram':
+        #     audio_paths = recursive_get_list('/home/share/Highlight/orgDataset/instagram_audio/'+args.ctg)
+        #     save_path_edited = '/home/share/Highlight/proDataset/TrainingSet/'+args.ctg+'_audio_edited'
+        # if args.dataset == 'youtube':
+        #     audio_paths = recursive_get_list('/home/share/Highlight/proDataset/DomainSpecific/audio/'+args.ctg)
+        #     save_path_edited = '/home/share/Highlight/proDataset/DomainSpecific/feature/'+args.ctg+'_audio_edited'
+        # if args.dataset == 'tvsum':
+        #     audio_paths = recursive_get_list('/home/share/Highlight/proDataset/TVSum/audio/'+args.ctg)
+        #     save_path_edited = '/home/share/Highlight/proDataset/TVSum/feature/'+args.ctg+'_audio_edited'
+        # if args.dataset == 'cosum':
+        #     audio_paths = recursive_get_list('/home/share/Highlight/proDataset/CoSum/audio/'+args.ctg)
+        #     save_path_edited = '/home/share/Highlight/proDataset/CoSum/feature/'+args.ctg+'_audio_edited'
+
+        audio_paths = args.audio_path
+        save_path_edited = args.save_path
 
         if args.postprocess:
             save_path_edited+='.npy'

@@ -42,8 +42,10 @@ import argparse
 def parse_opts():
     parser = argparse.ArgumentParser()
    
-    parser.add_argument('--ctg',type=str)
-    parser.add_argument('--dataset',type=str)
+    # parser.add_argument('--ctg',type=str)
+    # parser.add_argument('--dataset',type=str)
+    parser.add_argument("--audio_path", type=str)
+    parser.add_argument("--duration_path", type=str)
     
     parser.set_defaults(verbose=False)
 
@@ -56,18 +58,22 @@ if __name__ == '__main__':
 
        
         #skating,skiing,surfing，dog,
-        if args.dataset == 'instagram':
-            audio_paths = recursive_get_list('/home/share/Highlight/orgDataset/instagram_audio/'+args.ctg)
-            duration_path = '/home/share/Highlight/proDataset/TrainingSet/'+args.ctg+'_duration.npy'
-        if args.dataset == 'youtube':
+        # if args.dataset == 'instagram':
+        #     audio_paths = recursive_get_list('/home/share/Highlight/orgDataset/instagram_audio/'+args.ctg)
+        #     duration_path = '/home/share/Highlight/proDataset/TrainingSet/'+args.ctg+'_duration.npy'
+        # if args.dataset == 'youtube':
         
-            audio_paths = recursive_get_list('/home/share/Highlight/proDataset/DomainSpecific/audio/'+args.ctg)
-            duration_path = '/home/share/Highlight/proDataset/DomainSpecific/feature/'+args.ctg+'_duration.npy'
-        if args.dataset == 'tvsum':
-            audio_paths = recursive_get_list('/home/share/Highlight/proDataset/TVSum/audio/'+args.ctg)
-            duration_path = '/home/share/Highlight/proDataset/TVSum/feature/'+args.ctg+'_duration.npy'
+        #     audio_paths = recursive_get_list('/home/share/Highlight/proDataset/DomainSpecific/audio/'+args.ctg)
+        #     duration_path = '/home/share/Highlight/proDataset/DomainSpecific/feature/'+args.ctg+'_duration.npy'
+        # if args.dataset == 'tvsum':
+        #     audio_paths = recursive_get_list('/home/share/Highlight/proDataset/TVSum/audio/'+args.ctg)
+        #     duration_path = '/home/share/Highlight/proDataset/TVSum/feature/'+args.ctg+'_duration.npy'
+
+        audio_paths = args.audio_path
+        duration_path = args.duration_path
+
         if os.path.exists(duration_path):
-            audio_duration_dict = np.load(duration_path).tolist()
+            audio_duration_dict = np.load(duration_path, allow_pickle=True).tolist()
         else:
             audio_duration_dict =defaultdict(float)
         print(duration_path)
