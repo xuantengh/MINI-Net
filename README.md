@@ -71,7 +71,7 @@ Change directory to `src` and run following code:
 CUDA_VISIBLE_DEVICES=1 python trainMIL.py --dataset youtube --domain gymnastics \
 	--train_path /home/share/Highlight/proDataset/TrainingSet/ \
 	--test_path /home/share/Highlight/proDataset/DomainSpecific \
-	--topk_mAP 1 --FNet MILModel3 --HNet HNet1 --AM AttentionModule_1 \
+	--topk_mAP 1 --FNet MILModel3 --HNet HNet1 --AM AttentionModule \
 	--DS MILDataset --AHLoss AdaptiveHingerLoss \
 	--short_lower 10 --short_upper 40 --long_lower 60 --long_upper 60000 --bagsize 60 
 ```
