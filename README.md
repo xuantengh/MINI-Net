@@ -40,6 +40,8 @@ Parameters:
 
 See `visual-audio fusion/opts.py` for details of data selection hyper-parameters.
 
+The extracted feature of three test dataset are available at [here](https://mail2sysueducn-my.sharepoint.com/:f:/g/personal/huangxt57_mail2_sysu_edu_cn/EtczIXn1ic1Ai3jemGa-o5gBVgYvk7VIixZ14NmwJENKPg?e=b6ITk1).
+
 ## Main Results
 
 - Youtube:
