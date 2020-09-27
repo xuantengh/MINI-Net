@@ -65,7 +65,7 @@ This repo contains source code for our ECCV 2020 work **MINI-Net: Multiple Insta
 
 ## Train
 
-Change directory to `visual-audio fusion` and run following code:
+Change directory to `src` and run following code:
 
 ```bash
 CUDA_VISIBLE_DEVICES=1 python trainMIL.py --dataset youtube --domain gymnastics \
