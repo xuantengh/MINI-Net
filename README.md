@@ -99,7 +99,7 @@ Note: In our code, the directory  `train_path`  in the parameter must include:
 
 For example, there contains 3 files for category PK belongs to TVsum dataset in that directory:
 
-```
+```bash
 PK_1s.npy											// visual features for video with categoty PK
 PK_audio_edited_nopost.npy		// audio features
 PK_duration.npy								// duration information for each valid video
